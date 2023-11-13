@@ -17,6 +17,14 @@
         - Allows us access to resolvers.
 */
 
+const testEndpoint = 'https://jsonplaceholder.typicode.com/posts/1';
+fetch(testEndpoint)
+    // .then(response => console.log(response));
+    // .then(response => console.log(response.url));
+    // .then(response => console.log(response.body));
+    .then(response => response.json())
+    .then(data => console.log(data))
+
 
 //! JSON
 /* 
@@ -37,6 +45,9 @@
 */
 
 //? JSON.parse(string)
+let myText = '{"name": "Gollum", "lost_ring":true}';
+console.log(myText);
+console.log(JSON.parse(myText));
 
 
 //*   The Process:
@@ -49,10 +60,25 @@
 */
 
 //? Fetches within Functions
+const url = 'https://meowfacts.herokuapp.com/';
 
+// function getCatFacts() {
+//     fetch(url)
+//         .then(res => res.json())
+//         .then(obj => {
+//             // console.log(obj);
+//             // console.log(obj.data);
+//             console.log(obj.data[0]);
+//         })
+// }
 
 //* Using Async/Await
-
+// const getCatFacts = async() => {
+//     let res = await fetch(url);
+//     let results = await res.json();
+//     let data = results.data[0];
+//     console.log(data);
+// }
 
 //* Error handling
 /* 
@@ -68,3 +94,18 @@
     }
 
 */
+
+async function getCatFacts() {
+
+    try {
+        let res = await fetch(url);
+        // let res = fetch(url); // used to see the catch
+        let results = await res.json();
+        let data = results.data[0];
+        console.log(data);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+getCatFacts();
